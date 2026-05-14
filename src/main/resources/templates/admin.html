@@ -1,47 +1,146 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Admin Panel</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<head>
+    <title>Admin Panel — MedStore</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/medstore.css}" href="medstore.css">
 </head>
-<body class="bg-light">
-<div class="container mt-4">
-    <h3>Admin Dashboard</h3>
-    <div class="row mb-4">
-        <div class="col"><a href="/users"     class="btn btn-outline-primary w-100">Manage Users</a></div>
-        <div class="col"><a href="/medicines" class="btn btn-outline-success w-100">Manage Medicines</a></div>
-        <div class="col"><a href="/orders"    class="btn btn-outline-warning w-100">Manage Orders</a></div>
-        <div class="col"><a href="/reviews"   class="btn btn-outline-info w-100">Manage Reviews</a></div>
-    </div>
-    <div class="card mb-4">
-        <div class="card-header bg-secondary text-white">Register New Admin</div>
-        <div class="card-body">
-            <form action="/admin/register" method="post" class="row g-2">
-                <div class="col"><input type="text" name="name" class="form-control" placeholder="Name" required></div>
-                <div class="col"><input type="email" name="email" class="form-control" placeholder="Email" required></div>
-                <div class="col"><input type="password" name="password" class="form-control" placeholder="Password" required></div>
-                <div class="col">
-                    <select name="level" class="form-select">
-                        <option value="ADMIN">Admin</option>
-                        <option value="SUPER">Super Admin</option>
-                    </select>
-                </div>
-                <div class="col-auto"><button class="btn btn-secondary">Add Admin</button></div>
-            </form>
+<body>
+
+<nav class="ms-nav">
+    <div class="ms-nav-inner">
+        <a class="ms-logo" href="/">
+            <div class="ms-logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2l2 7h7l-5.6 4.1L17.4 20 12 15.9 6.6 20l2-6.9L3 9h7z"/></svg>
+            </div>
+            <span class="ms-logo-text">Med<span>Store</span></span>
+        </a>
+        <div class="ms-nav-links">
+            <a href="/medicines" class="ms-nav-link">Medicines</a>
+            <a href="/orders"    class="ms-nav-link">Orders</a>
+            <a href="/reviews"   class="ms-nav-link">Reviews</a>
+            <a href="/admin"     class="ms-nav-link active">Admin</a>
+        </div>
+        <div class="ms-nav-right">
+            <a href="/" class="ms-btn ms-btn-ghost ms-btn-sm">← Home</a>
         </div>
     </div>
-    <table class="table table-bordered">
-        <thead class="table-secondary">
-        <tr><th>ID</th><th>Name</th><th>Email</th><th>Level</th><th>Actions</th></tr>
-        </thead>
-        <tbody>
-        <tr th:each="admin : ${admins}">
-            <td th:text="${admin.adminId}"></td>
-            <td th:text="${admin.name}"></td>
-            <td th:text="${admin.email}"></td>
-            <td th:text="${admin.level}"></td>
-            <td><a th:href="@{/admin/delete(id=${admin.adminId})}" class="btn btn-sm btn-danger">Delete</a></td>
-        </tr>
-        </tbody>
-    </table>
+</nav>
+
+<div class="ms-page">
+    <div class="ms-page-header">
+        <div>
+            <div class="ms-page-title">Admin Dashboard</div>
+            <div class="ms-page-subtitle">Manage all aspects of MedStore</div>
+        </div>
+        <span class="ms-badge badge-teal" style="font-size:12px;padding:5px 14px;">Admin Access</span>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="ms-admin-grid">
+        <a href="/users" class="ms-admin-tile tile-teal">
+            <div class="ms-admin-tile-icon">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="ms-admin-tile-label">Manage Users</div>
+            <div class="ms-admin-tile-sub">View, edit &amp; delete accounts</div>
+        </a>
+        <a href="/medicines" class="ms-admin-tile tile-green">
+            <div class="ms-admin-tile-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+            <div class="ms-admin-tile-label">Manage Medicines</div>
+            <div class="ms-admin-tile-sub">Add, update &amp; remove stock</div>
+        </a>
+        <a href="/orders" class="ms-admin-tile tile-amber">
+            <div class="ms-admin-tile-icon">
+                <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <div class="ms-admin-tile-label">Manage Orders</div>
+            <div class="ms-admin-tile-sub">Track &amp; update order status</div>
+        </a>
+        <a href="/reviews" class="ms-admin-tile tile-blue">
+            <div class="ms-admin-tile-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="ms-admin-tile-label">Manage Reviews</div>
+            <div class="ms-admin-tile-sub">Moderate customer reviews</div>
+        </a>
+    </div>
+
+    <div class="ms-divider"></div>
+
+    <!-- Register Admin -->
+    <div class="ms-card" style="margin-bottom:1.5rem;">
+        <div class="ms-card-header">
+            <span class="ms-card-header-dot dot-teal"></span>
+            Register New Admin
+        </div>
+        <form action="/admin/register" method="post" class="ms-inline-form">
+            <div class="ms-form-group">
+                <label class="ms-label">Name</label>
+                <input type="text" name="name" class="ms-input" placeholder="Full name" required>
+            </div>
+            <div class="ms-form-group">
+                <label class="ms-label">Email</label>
+                <input type="email" name="email" class="ms-input" placeholder="admin@medstore.com" required>
+            </div>
+            <div class="ms-form-group">
+                <label class="ms-label">Password</label>
+                <input type="password" name="password" class="ms-input" placeholder="••••••••" required>
+            </div>
+            <div class="ms-form-group" style="flex:0 0 160px;">
+                <label class="ms-label">Level</label>
+                <select name="level" class="ms-select">
+                    <option value="ADMIN">Admin</option>
+                    <option value="SUPER">Super Admin</option>
+                </select>
+            </div>
+            <div class="ms-form-group" style="flex:0 0 auto;">
+                <label class="ms-label">&nbsp;</label>
+                <button class="ms-btn ms-btn-primary">Add Admin</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Admin Table -->
+    <div class="ms-table-wrap">
+        <table class="ms-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Level</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="admin : ${admins}">
+                <td><span class="ms-badge badge-gray" th:text="${admin.adminId}"></span></td>
+                <td><strong th:text="${admin.name}"></strong></td>
+                <td style="color:var(--slate-mid);" th:text="${admin.email}"></td>
+                <td>
+                    <span th:if="${admin.level == 'SUPER'}" class="ms-badge badge-teal">Super Admin</span>
+                    <span th:if="${admin.level == 'ADMIN'}" class="ms-badge badge-blue">Admin</span>
+                    <span th:if="${admin.level != 'SUPER' and admin.level != 'ADMIN'}"
+                          class="ms-badge badge-gray" th:text="${admin.level}"></span>
+                </td>
+                <td>
+                    <a th:href="@{/admin/delete(id=${admin.adminId})}"
+                       class="ms-btn ms-btn-danger ms-btn-sm"
+                       onclick="return confirm('Remove this admin?')">Remove</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-</body></html>
+
+<footer class="ms-footer">
+    © 2025 <span>MedStore</span> — Licensed Online Pharmacy
+</footer>
+</body>
+</html>

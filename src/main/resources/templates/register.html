@@ -1,19 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Register</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<head>
+    <title>Register — MedStore</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/medstore.css}" href="medstore.css">
+    <style>
+        body { display:flex; align-items:center; justify-content:center; min-height:100vh; }
+        .auth-wrap { width:100%; max-width:440px; padding:2rem; }
+        .auth-logo { text-align:center; margin-bottom:2rem; }
+        .auth-logo a { display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
+        .auth-logo-icon { width:40px;height:40px;background:var(--teal);border-radius:11px;display:flex;align-items:center;justify-content:center; }
+        .auth-logo-icon svg { width:22px;height:22px;stroke:white;fill:none;stroke-width:2.5; }
+        .auth-logo-text { font-family:'DM Serif Display',serif;font-size:22px;color:var(--slate); }
+        .auth-logo-text span { color:var(--teal); }
+        .auth-card { background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:2rem;box-shadow:var(--shadow-md); }
+        .auth-title { font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--slate);margin-bottom:4px; }
+        .auth-sub { font-size:14px;color:var(--slate-light);margin-bottom:1.75rem; }
+        .auth-footer { text-align:center;margin-top:1.25rem;font-size:14px;color:var(--slate-light); }
+        .auth-footer a { color:var(--teal);font-weight:500;text-decoration:none; }
+        .auth-footer a:hover { text-decoration:underline; }
+        .ms-btn-block { width:100%;justify-content:center;padding:12px;font-size:15px;border-radius:var(--r-sm); }
+    </style>
 </head>
-<body class="bg-light">
-<div class="container mt-5" style="max-width:400px">
-    <h3 class="text-primary">Create Account</h3>
-    <form action="/register" method="post">
-        <div class="mb-3"><label>Name</label>
-            <input type="text" name="name" class="form-control" required></div>
-        <div class="mb-3"><label>Email</label>
-            <input type="email" name="email" class="form-control" required></div>
-        <div class="mb-3"><label>Password</label>
-            <input type="password" name="password" class="form-control" required></div>
-        <button type="submit" class="btn btn-success w-100">Register</button>
-    </form>
+<body>
+<div class="auth-wrap">
+    <div class="auth-logo">
+        <a href="/">
+            <div class="auth-logo-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2l2 7h7l-5.6 4.1L17.4 20 12 15.9 6.6 20l2-6.9L3 9h7z"/></svg>
+            </div>
+            <span class="auth-logo-text">Med<span>Store</span></span>
+        </a>
+    </div>
+
+    <div class="auth-card">
+        <div class="auth-title">Create your account</div>
+        <div class="auth-sub">Join MedStore — it's free and takes a minute</div>
+
+        <form action="/register" method="post">
+            <div class="ms-form-group">
+                <label class="ms-label">Full Name</label>
+                <input type="text" name="name" class="ms-input" placeholder="John Doe" required>
+            </div>
+            <div class="ms-form-group">
+                <label class="ms-label">Email Address</label>
+                <input type="email" name="email" class="ms-input" placeholder="you@example.com" required>
+            </div>
+            <div class="ms-form-group">
+                <label class="ms-label">Password</label>
+                <input type="password" name="password" class="ms-input" placeholder="Choose a strong password" required>
+            </div>
+            <button type="submit" class="ms-btn ms-btn-primary ms-btn-block">Create Account</button>
+        </form>
+    </div>
+
+    <div class="auth-footer">
+        Already have an account? <a href="/login">Sign in</a>
+    </div>
 </div>
-</body></html>
+</body>
+</html>
