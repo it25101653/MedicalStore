@@ -11,7 +11,9 @@ public class CartService {
     private static final String FILE = "data/cart.txt";
 
     public Cart getCartForUser(String userId) {
-        List<CartItem> items = getAllItems().stream()
+         if (userId == null || userId.trim().isEmpty()) {
+            return new Cart("", new ArrayList<>());
+        }        List<CartItem> items = getAllItems().stream()
                 .filter(i -> i.getUserId().equals(userId))
                 .collect(Collectors.toList());
         return new Cart(userId, items);
