@@ -6,7 +6,7 @@ public abstract class Medicine {
     private String name;
     private String category;
     private double price;
-    private int    stock;
+    private int stock;
 
     public Medicine(String medId, String name, String category, double price, int stock) {
         this.medId    = medId;
