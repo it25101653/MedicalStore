@@ -22,6 +22,7 @@ public class CartService {
     private List<CartItem> getAllItems() {
         List<CartItem> list = new ArrayList<>();
         File f = new File(FILE);
+        f.getParentFile().mkdirs();
         if (!f.exists()) return list;
         try (BufferedReader br = new BufferedReader(new FileReader(f))) {
             String line;
