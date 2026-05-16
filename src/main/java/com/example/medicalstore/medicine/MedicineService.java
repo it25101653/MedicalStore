@@ -23,6 +23,7 @@ public class MedicineService {
         return list;
     }
 
+
     /** Search by name OR category (case-insensitive). */
     public List<Medicine> search(String query) {
         String q = query.toLowerCase();
