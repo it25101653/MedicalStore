@@ -15,6 +15,7 @@ public class OrderController {
 public String listOrders(Model model) {
 
     String currentUser = "USR001";
+    System.out.println(orderService.getAllOrders());
 
     model.addAttribute("orders",
             orderService.getAllOrders()
