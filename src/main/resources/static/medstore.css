@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --teal: #0D9488;
+    --teal-light: #CCFBF1;
+    --teal-mid: #5EEAD4;
+    --teal-dark: #0F766E;
+    --teal-xdark: #134E4A;
+    --cream: #FAFAF7;
+    --white: #FFFFFF;
+    --slate: #1E293B;
+    --slate-mid: #475569;
+    --slate-light: #94A3B8;
+    --border: #E2E8F0;
+    --border-light: #F1F5F9;
+    --red: #EF4444;
+    --red-soft: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-soft: #FFFBEB;
+    --green: #22C55E;
+    --green-soft: #F0FDF4;
+    --blue-soft: #EFF6FF;
+    --blue: #3B82F6;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 20px;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--slate);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ── NAV ── */
+.ms-nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: var(--shadow-sm);
+}
+.ms-nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 2rem; height: 66px;
+    display: flex; align-items: center; gap: 1.5rem;
+}
+.ms-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; flex-shrink: 0;
+}
+.ms-logo-icon {
+    width: 34px; height: 34px;
+    background: var(--teal); border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+}
+.ms-logo-icon svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2.5; }
+.ms-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px; color: var(--slate); letter-spacing: -0.3px;
+}
+.ms-logo-text span { color: var(--teal); }
+.ms-nav-links { display: flex; align-items: center; gap: 2px; margin-left: 1rem; }
+.ms-nav-link {
+    padding: 7px 13px; border-radius: var(--r-sm);
+    font-size: 14px; font-weight: 500; color: var(--slate-mid);
+    text-decoration: none; transition: all 0.15s; white-space: nowrap;
+}
+.ms-nav-link:hover { background: var(--border-light); color: var(--slate); }
+.ms-nav-link.active { background: var(--teal-light); color: var(--teal-dark); }
+.ms-nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.ms-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+    cursor: pointer; border: none; text-decoration: none; transition: all 0.18s;
+}
+.ms-btn-primary { background: var(--teal); color: white; }
+.ms-btn-primary:hover { background: var(--teal-dark); color: white; }
+.ms-btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--slate-mid); }
+.ms-btn-outline:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-light); }
+.ms-btn-danger { background: var(--red-soft); color: var(--red); border: 1px solid #FECACA; }
+.ms-btn-danger:hover { background: var(--red); color: white; }
+.ms-btn-warning { background: var(--amber-soft); color: #92400E; border: 1px solid #FDE68A; }
+.ms-btn-warning:hover { background: var(--amber); color: white; }
+.ms-btn-sm { padding: 6px 14px; font-size: 13px; border-radius: var(--r-sm); }
+.ms-btn-ghost { background: transparent; color: var(--slate-mid); border: 1.5px solid var(--border); }
+.ms-btn-ghost:hover { background: var(--border-light); color: var(--slate); }
+
+/* ── PAGE WRAPPER ── */
+.ms-page { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2rem; }
+.ms-page-sm { max-width: 480px; margin: 0 auto; padding: 3rem 2rem; }
+.ms-page-md { max-width: 640px; margin: 0 auto; padding: 3rem 2rem; }
+
+/* ── PAGE HEADER ── */
+.ms-page-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+}
+.ms-page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem; color: var(--slate); letter-spacing: -0.3px;
+}
+.ms-page-subtitle { font-size: 14px; color: var(--slate-light); margin-top: 2px; }
+
+/* ── CARDS ── */
+.ms-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--r-lg); padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+.ms-card-header {
+    font-size: 13px; font-weight: 600; color: var(--slate-mid);
+    text-transform: uppercase; letter-spacing: 0.07em;
+    margin-bottom: 1.25rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light);
+    display: flex; align-items: center; gap: 8px;
+}
+.ms-card-header-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+}
+.dot-teal { background: var(--teal); }
+.dot-amber { background: var(--amber); }
+.dot-red { background: var(--red); }
+.dot-blue { background: var(--blue); }
+
+/* ── FORM ELEMENTS ── */
+.ms-form-group { margin-bottom: 1.25rem; }
+.ms-label {
+    display: block; font-size: 13px; font-weight: 500;
+    color: var(--slate-mid); margin-bottom: 6px;
+}
+.ms-input, .ms-select, .ms-textarea {
+    width: 100%; padding: 10px 14px;
+    border: 1.5px solid var(--border); border-radius: var(--r-sm);
+    font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--slate);
+    background: var(--white); outline: none; transition: border-color 0.18s;
+}
+.ms-input:focus, .ms-select:focus, .ms-textarea:focus {
+    border-color: var(--teal); box-shadow: 0 0 0 3px rgba(13,148,136,0.1);
+}
+.ms-input::placeholder { color: var(--slate-light); }
+.ms-input-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.ms-input-row .ms-form-group { flex: 1; min-width: 140px; }
+
+/* ── TABLES ── */
+.ms-table-wrap {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--r-lg); overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+.ms-table { width: 100%; border-collapse: collapse; }
+.ms-table thead th {
+    background: var(--cream); padding: 12px 16px;
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--slate-light);
+    border-bottom: 1px solid var(--border); text-align: left; white-space: nowrap;
+}
+.ms-table tbody td {
+    padding: 13px 16px; font-size: 14px; color: var(--slate-mid);
+    border-bottom: 1px solid var(--border-light); vertical-align: middle;
+}
+.ms-table tbody tr:last-child td { border-bottom: none; }
+.ms-table tbody tr:hover td { background: #FAFCFF; }
+.ms-table tbody td strong { color: var(--slate); font-weight: 500; }
+
+/* ── BADGES ── */
+.ms-badge {
+    display: inline-flex; align-items: center;
+    padding: 3px 10px; border-radius: 50px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.03em;
+}
+.badge-teal { background: var(--teal-light); color: var(--teal-xdark); }
+.badge-green { background: var(--green-soft); color: #14532D; }
+.badge-amber { background: var(--amber-soft); color: #78350F; }
+.badge-red { background: var(--red-soft); color: #7F1D1D; }
+.badge-blue { background: var(--blue-soft); color: #1E3A5F; }
+.badge-gray { background: var(--border-light); color: var(--slate-mid); }
+
+/* ── ALERT ── */
+.ms-alert {
+    padding: 12px 16px; border-radius: var(--r-sm);
+    font-size: 14px; margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 10px;
+}
+.ms-alert-danger { background: var(--red-soft); color: #7F1D1D; border: 1px solid #FECACA; }
+
+/* ── STAT CARDS ── */
+.ms-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 16px; margin-bottom: 2rem; }
+.ms-stat {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--r-md); padding: 1.25rem 1.5rem;
+}
+.ms-stat-label { font-size: 12px; color: var(--slate-light); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.ms-stat-value { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--slate); line-height: 1; }
+.ms-stat-sub { font-size: 12px; color: var(--slate-light); margin-top: 4px; }
+
+/* ── ACTION BUTTONS IN TABLE ── */
+.ms-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+/* ── DIVIDER ── */
+.ms-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+/* ── FOOTER ── */
+.ms-footer {
+    background: var(--slate); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 1.5rem;
+    font-size: 13px; margin-top: 4rem;
+}
+.ms-footer span { color: var(--teal-mid); }
+
+/* ── HERO (index only) ── */
+.ms-hero {
+    background: linear-gradient(135deg, var(--teal-xdark) 0%, var(--teal-dark) 55%, var(--teal) 100%);
+    padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden;
+}
+.ms-hero::before {
+    content:''; position:absolute; top:-100px; right:-100px;
+    width:350px; height:350px; background:rgba(255,255,255,0.04); border-radius:50%;
+}
+.ms-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    color: white; margin-bottom: 1rem; letter-spacing: -0.5px;
+}
+.ms-hero h1 em { font-style:italic; color: var(--teal-mid); }
+.ms-hero p { color: rgba(255,255,255,0.72); font-size: 17px; margin-bottom: 2rem; max-width: 480px; margin-left:auto; margin-right:auto; }
+.ms-hero-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.ms-hero-btn-white {
+    background: white; color: var(--teal-dark);
+    border: none; padding: 13px 32px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size:15px; font-weight:600;
+    cursor:pointer; text-decoration:none; transition:all 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.ms-hero-btn-white:hover { transform:translateY(-1px); color:var(--teal-dark); }
+.ms-hero-btn-outline {
+    background: transparent; color: white;
+    border: 1.5px solid rgba(255,255,255,0.4); padding: 13px 32px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size:15px; font-weight:500;
+    cursor:pointer; text-decoration:none; transition:all 0.2s;
+}
+.ms-hero-btn-outline:hover { border-color:white; background:rgba(255,255,255,0.08); color:white; }
+
+/* ── ADMIN DASHBOARD LINKS ── */
+.ms-admin-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:2rem; }
+.ms-admin-tile {
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg);
+    padding: 1.75rem 1.5rem; text-align:center; text-decoration:none;
+    transition:all 0.2s; display:block;
+}
+.ms-admin-tile:hover { border-color:var(--teal); box-shadow:var(--shadow-md); transform:translateY(-2px); }
+.ms-admin-tile-icon {
+    width:52px; height:52px; border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+    margin: 0 auto 1rem;
+}
+.ms-admin-tile-icon svg { width:26px; height:26px; stroke:currentColor; fill:none; stroke-width:2; }
+.ms-admin-tile-label { font-size:14px; font-weight:600; color:var(--slate); }
+.ms-admin-tile-sub { font-size:12px; color:var(--slate-light); margin-top:3px; }
+.tile-teal .ms-admin-tile-icon { background:var(--teal-light); color:var(--teal-dark); }
+.tile-green .ms-admin-tile-icon { background:var(--green-soft); color:#15803D; }
+.tile-amber .ms-admin-tile-icon { background:var(--amber-soft); color:#B45309; }
+.tile-blue .ms-admin-tile-icon { background:var(--blue-soft); color:#1D4ED8; }
+
+/* ── INLINE FORM ROW (for add forms) ── */
+.ms-inline-form { display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end; }
+.ms-inline-form .ms-form-group { flex:1; min-width:120px; margin-bottom:0; }
+
+/* ── CART TOTAL ── */
+.ms-cart-total {
+    display:flex; justify-content:flex-end; align-items:center;
+    gap:12px; padding:1rem 1.5rem;
+    background:var(--white); border:1px solid var(--border);
+    border-radius:var(--r-md); margin-top:1rem;
+}
+.ms-cart-total-label { font-size:15px; color:var(--slate-mid); }
+.ms-cart-total-value { font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--teal-dark); }
+
+/* ── STAR RATING ── */
+.ms-stars { color:var(--amber); font-size:14px; }
+
+/* ── REVIEW CARD ── */
+.ms-review-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r-md); padding:1.25rem 1.5rem; }
+.ms-review-meta { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:8px; }
+.ms-review-comment { font-size:14px; color:var(--slate-mid); margin-bottom:12px; line-height:1.6; }
+.ms-review-edit { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.ms-review-edit .ms-inpAut { flex:1; min-width:80px; padding:7px 11px; font-size:13px; }
