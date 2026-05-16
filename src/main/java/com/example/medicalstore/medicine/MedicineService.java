@@ -23,9 +23,12 @@ public class MedicineService {
         return list;
     }
 
+    /** Search by name OR category (case-insensitive). */
     public List<Medicine> search(String query) {
+        String q = query.toLowerCase();
         return getAllMedicines().stream()
-                .filter(m -> m.getName().toLowerCase().contains(query.toLowerCase()))
+                .filter(m -> m.getName().toLowerCase().contains(q)
+                        || m.getCategory().toLowerCase().contains(q))
                 .collect(Collectors.toList());
     }
 
@@ -35,18 +38,21 @@ public class MedicineService {
                 .findFirst().orElse(null);
     }
 
+    /** Add a new medicine (admin action). */
     public void add(OTCMedicine m) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE, true))) {
             bw.write(m.toFileString()); bw.newLine();
         } catch (IOException e) { e.printStackTrace(); }
     }
 
-    public void update(String medId, double newPrice, int newStock) {
+    /** Admin edit: update price, stock, and description. */
+    public void update(String medId, double newPrice, int newStock, String newDescription) {
         List<Medicine> list = getAllMedicines();
         for (Medicine m : list)
             if (m.getMedId().equals(medId)) {
                 m.setPrice(newPrice);
                 m.setStock(newStock);
+                m.setDescription(newDescription);
             }
         saveAll(list);
     }
@@ -64,5 +70,7 @@ public class MedicineService {
         } catch (IOException e) { e.printStackTrace(); }
     }
 
-    public String generateId() { return "MED" + System.currentTimeMillis(); }
+    public String generateId() {
+        return "MED" + System.currentTimeMillis();
+    }
 }
