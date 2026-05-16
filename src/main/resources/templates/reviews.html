@@ -101,11 +101,6 @@
 
             <p class="ms-review-comment" th:text="${review.comment}"></p>
 
-            <div class="ms-review-edit">
-                <a th:href="@{/reviews/delete(id=${review.reviewId})}"
-                   class="ms-btn ms-btn-danger ms-btn-sm"
-                   onclick="return confirm('Delete this review?')">Delete</a>
-            </div>
 
         </div>
     </div>
