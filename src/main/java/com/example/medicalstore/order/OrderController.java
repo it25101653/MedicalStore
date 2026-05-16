@@ -11,11 +11,19 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/orders")
-    public String listOrders(Model model) {
-        model.addAttribute("orders", orderService.getAllOrders());
-        return "orders";
-    }
+   @GetMapping("/orders")
+public String listOrders(Model model) {
+
+    String currentUser = "USR001";
+
+    model.addAttribute("orders",
+            orderService.getAllOrders()
+                    .stream()
+                    .filter(order -> order.getUserId().equals(currentUser))
+                    .toList());
+
+    return "orders";
+}
 
     @PostMapping("/orders/place")
     public String placeOrder(@RequestParam String userId,
