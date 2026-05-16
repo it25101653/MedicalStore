@@ -13,6 +13,9 @@ public class CartController {
 
     @GetMapping("/cart")
     public String viewCart(@RequestParam String userId, Model model) {
+        if(userId == null || userId.isEmpty()) {
+            return "redirect:/login";
+        }
         model.addAttribute("cart", cartService.getCartForUser(userId));
         model.addAttribute("userId", userId);
         return "cart";
