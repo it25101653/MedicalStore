@@ -24,6 +24,7 @@ public class UserService {
     }
 
     public void register(Customer c) {
+        validateUser(c.getEmail(),c.getPassword());
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE, true))) {
             bw.write(c.toFileString());
             bw.newLine();
@@ -63,7 +64,26 @@ public class UserService {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE, false))) {
             for (User u : users) { bw.write(u.toFileString()); bw.newLine(); }
         } catch (IOException e) { e.printStackTrace(); }
+
     }
 
+
     public String generateId() { return "USR" + System.currentTimeMillis(); }
+
+    public boolean emailExists(String email){
+        return getAllUsers().stream()
+                .anyMatch(user -> user.getEmail().equalsIgnoreCase(email));
+    }
+    private void validateUser(String email,String password){
+        if(email == null || !email.contains("@")){
+            throw new IllegalArgumentException("Invalid email address.");
+        }
+        if (password == null || password.length() < 6) {
+            throw new IllegalArgumentException("Password must be at least 6 characters.");
+        }
+        if(emailExists(email)){
+            throw new IllegalArgumentException("An account with this email already exists.");
+
+        }
+    }
 }

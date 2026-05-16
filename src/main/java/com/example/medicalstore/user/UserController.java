@@ -30,10 +30,17 @@ public class UserController {
     @PostMapping("/register")
     public String doRegister(@RequestParam String name,
                              @RequestParam String email,
-                             @RequestParam String password) {
-        Customer c = new Customer(userService.generateId(), name, email, password);
-        userService.register(c);
-        return "redirect:/login";
+                             @RequestParam String password,
+                             Model model
+    ) {
+        try {
+            Customer c = new Customer(userService.generateId(), name, email, password);
+            userService.register(c);
+            return "redirect:/login";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "register";
+        }
     }
 
     @GetMapping("/users")

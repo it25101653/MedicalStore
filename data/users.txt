@@ -1,3 +1,4 @@
 USR002,Nimal Silva,nimal@mail.com,pass456,CUSTOMER
 USR1778697165164,Anupa Chirantha,paachirantha20@gmail.com,1234,CUSTOMER
 USR1778730391619,Anupa Chirantha,paachirantha20@gmail.com,678,CUSTOMER
+USR1778917256761,bruo,whaaattttttt@gmail.com,8907563d,CUSTOMER
