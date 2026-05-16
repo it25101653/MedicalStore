@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/medstore.css}" href="medstore.css">
+
+    <div class="ms-form-group" style="flex:0 0 150px;">
+        <label class="ms-label">Rating</label>
+        <div class="ms-star-rating">
+            <input type="radio" id="star5" name="rating" value="5">
+            <label for="star5" title="5">★</label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4" title="4">★</label>
+            <input type="radio" id="star3" name="rating" value="3" checked>
+            <label for="star3" title="3">★</label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2" title="2">★</label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1" title="1">★</label>
+        </div>
+    </div>
 </head>
 <body>
 
@@ -56,15 +72,20 @@
                 <label class="ms-label">Medicine ID</label>
                 <input type="text" name="medId" class="ms-input" placeholder="Med ID" required>
             </div>
-            <div class="ms-form-group" style="flex:0 0 120px;">
+            <div class="ms-form-group" style="flex:0 0 150px;">
                 <label class="ms-label">Rating</label>
-                <select name="rating" class="ms-select">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option selected>5</option>
-                </select>
+                <div class="ms-star-rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5" title="5">★</label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4" title="4">★</label>
+                    <input type="radio" id="star3" name="rating" value="3" checked>
+                    <label for="star3" title="3">★</label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" title="2">★</label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" title="1">★</label>
+                </div>
             </div>
             <div class="ms-form-group" style="flex:2;">
                 <label class="ms-label">Comment</label>
