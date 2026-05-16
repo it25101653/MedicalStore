@@ -12,11 +12,10 @@ public class CartController {
     private CartService cartService;
 
     @GetMapping("/cart")
-    public String viewCart(@RequestParam String userId, Model model) {
-        if(userId == null || userId.isEmpty()) {
-            return "redirect:/login";
-        }
-        model.addAttribute("cart", cartService.getCartForUser(userId));
+   public String viewCart(@RequestParam(required = false) String userId, Model model) {
+    if (userId == null || userId.trim().isEmpty()) {
+        return "redirect:/login"; 
+    }        model.addAttribute("cart", cartService.getCartForUser(userId));
         model.addAttribute("userId", userId);
         return "cart";
     }
