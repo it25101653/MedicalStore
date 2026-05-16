@@ -17,6 +17,11 @@
         <tr><th>Order ID</th><th>User</th><th>Medicine</th><th>Qty</th><th>Total</th><th>Status</th><th>Cancel</th></tr>
         </thead>
         <tbody>
+            <tr th:if="${#lists.isEmpty(orders)}">
+    <td colspan="7" class="text-center text-danger">
+        No orders available
+    </td>
+</tr>
         <tr th:each="order : ${orders}">
             <td th:text="${order.orderId}"></td>
             <td th:text="${order.userId}"></td>
