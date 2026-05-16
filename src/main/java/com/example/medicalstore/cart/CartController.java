@@ -26,9 +26,15 @@ public class CartController {
                           @RequestParam String medId,
                           @RequestParam String medName,
                           @RequestParam int quantity,
-                          @RequestParam double unitPrice) {
+                          @RequestParam double unitPrice) 
+                          @RequestParam(defaultValue = "cart") String redirect)    {
         cartService.addItem(new CartItem(userId, medId, medName, quantity, unitPrice));
-        return "redirect:/cart?userId=" + userId;
+           if ("medicines".equals(redirect)) {
+            return "redirect:/medicines";
+        }
+        if (redirect.startsWith("medicine-detail")) {
+            return "redirect:/medicines/view?id=" + medId;
+        }        return "redirect:/cart?userId=" + userId;
     }
 
     @PostMapping("/cart/update")
