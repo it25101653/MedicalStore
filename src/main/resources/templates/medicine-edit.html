@@ -1,19 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Edit Medicine</title>
+<head>
+    <title>Edit Medicine – Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background: #f5f7f2; }
+        .edit-card { max-width: 480px; margin: 50px auto; border-radius: 14px; overflow: hidden; }
+        .edit-card .card-header { background: #1a7a5e; color: #fff; }
+        .btn-save { background: #1a7a5e; color: #fff; }
+    </style>
 </head>
-<body class="bg-light">
-<div class="container mt-4" style="max-width:400px">
-    <h3>Edit Medicine</h3>
-    <form action="/medicines/edit" method="post">
-        <input type="hidden" name="medId" th:value="${med.medId}">
-        <div class="mb-3"><label>Price</label>
-            <input type="number" step="0.01" name="price" class="form-control" th:value="${med.price}"></div>
-        <div class="mb-3"><label>Stock</label>
-            <input type="number" name="stock" class="form-control" th:value="${med.stock}"></div>
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="/medicines" class="btn btn-secondary">Cancel</a>
-    </form>
+<body>
+
+<div class="container">
+    <div class="card edit-card shadow-sm">
+        <div class="card-header d-flex justify-content-between">
+            <span class="fw-bold">Edit Medicine</span>
+            <span class="badge bg-light text-dark" th:text="${med.medId}"></span>
+        </div>
+        <div class="card-body p-4">
+
+            <div class="alert alert-warning py-2">
+                ⚠️ Admin action — changes are visible to all users immediately.
+            </div>
+
+            <p class="fw-bold" style="color:#1a7a5e;" th:text="${med.name}"></p>
+
+            <form action="/medicines/edit" method="post">
+                <input type="hidden" name="medId" th:value="${med.medId}">
+
+                <div class="mb-3">
+                    <label class="form-label">Price (Rs.)</label>
+                    <input type="number" step="0.01" name="price"
+                           class="form-control" th:value="${med.price}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Stock (units)</label>
+                    <input type="number" name="stock"
+                           class="form-control" th:value="${med.stock}" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-control" rows="3"
+                              th:text="${med.description}"></textarea>
+                    <div class="form-text">Shown on the medicine detail page.</div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-save">Save Changes</button>
+                    <a href="/medicines" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-</body></html>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
