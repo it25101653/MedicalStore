@@ -13,6 +13,7 @@ public class OrderController {
 
    @GetMapping("/orders")
 public String listOrders(Model model) {
+    System.out.println("Orders page loaded");
 
     String currentUser = "USR001";
     System.out.println(orderService.getAllOrders());
