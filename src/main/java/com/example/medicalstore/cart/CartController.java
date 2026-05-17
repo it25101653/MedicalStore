@@ -12,8 +12,10 @@ public class CartController {
     private CartService cartService;
 
     @GetMapping("/cart")
-    public String viewCart(@RequestParam String userId, Model model) {
-        model.addAttribute("cart", cartService.getCartForUser(userId));
+   public String viewCart(@RequestParam(required = false) String userId, Model model) {
+    if (userId == null || userId.trim().isEmpty()) {
+        return "redirect:/login"; 
+    }        model.addAttribute("cart", cartService.getCartForUser(userId));
         model.addAttribute("userId", userId);
         return "cart";
     }
@@ -23,9 +25,15 @@ public class CartController {
                           @RequestParam String medId,
                           @RequestParam String medName,
                           @RequestParam int quantity,
-                          @RequestParam double unitPrice) {
+                          @RequestParam double unitPrice,
+                          @RequestParam(defaultValue = "cart") String redirect)    {
         cartService.addItem(new CartItem(userId, medId, medName, quantity, unitPrice));
-        return "redirect:/cart?userId=" + userId;
+           if ("medicines".equals(redirect)) {
+            return "redirect:/medicines";
+        }
+        if (redirect.startsWith("medicine-detail")) {
+            return "redirect:/medicines/view?id=" + medId;
+        }        return "redirect:/cart?userId=" + userId;
     }
 
     @PostMapping("/cart/update")

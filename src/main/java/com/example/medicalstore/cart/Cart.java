@@ -19,9 +19,11 @@ public class Cart {
         return items;
     }
     public int getCount() {
-        return items.size();
+         return items == null ? 0 : items.size();
     }
-
+    public boolean isEmpty() {
+        return items == null || items.isEmpty();
+    }
     public double getTotalPrice() {
         return items.stream()
                 .mapToDouble(CartItem::getItemTotal)
