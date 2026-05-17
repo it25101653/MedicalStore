@@ -1,3 +1,3 @@
-MED001,Paracetamol 500mg,Painkiller,12.50,100,OTC
-MED002,Vitamin C 1000mg,Supplement,8.00,200,OTC
-MED003,Amoxicillin 250mg,Antibiotic,45.00,60,OTC
+MED001,Paracetamol 500mg,Painkiller,12.50,100,OTC,Used to relieve mild to moderate pain and reduce fever. Suitable for headaches; toothaches and cold symptoms. Take one tablet every 4-6 hours with water. Do not exceed 8 tablets in 24 hours.
+MED002,Vitamin C 100mg,Supplement,8.00,200,OTC,High-strength Vitamin C supplement to support immune function and antioxidant defence. Take one tablet daily with food. Suitable for adults and children over 12.
+MED003,Amoxicillin 250mg,Antibiotic,22.00,60,OTC,A broad-spectrum penicillin antibiotic used to treat bacterial infections of the ear; throat; chest and urinary tract. Complete the full prescribed course. Consult a doctor before use.
