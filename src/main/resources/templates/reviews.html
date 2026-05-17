@@ -141,6 +141,22 @@
             </div>
 
             <p class="ms-review-comment" th:text="${review.comment}"></p>
+
+            <div style="display:flex;gap:12px;margin-top:10px;align-items:center;">
+                <a th:href="@{/reviews/like(id=${review.reviewId})}"
+                   style="text-decoration:none;background:#e8f5ee;border:1.5px solid #b6ddc8;
+              border-radius:8px;padding:6px 14px;font-size:14px;cursor:pointer;
+              color:#1a7a4a;font-weight:600;">
+                    👍 <span th:text="${review.likes}">0</span>
+                </a>
+                <a th:href="@{/reviews/dislike(id=${review.reviewId})}"
+                   style="text-decoration:none;background:#fdecea;border:1.5px solid #f5b7b1;
+              border-radius:8px;padding:6px 14px;font-size:14px;cursor:pointer;
+              color:#c0392b;font-weight:600;">
+                    👎 <span th:text="${review.dislikes}">0</span>
+                </a>
+            </div>
+
             <p style="font-size:11px;color:var(--slate-light);margin-top:4px;" th:text="'Posted on: ' + ${review.date}"></p>
 
 
