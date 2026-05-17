@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${med.name} + ' – MedStore'">Medicine Detail</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background: #f5f7f2; }
+        .detail-card { border-radius: 16px; overflow: hidden; border: 1px solid #c7ddd6; }
+        .detail-header { background: #1a7a5e; color: #fff; padding: 28px; }
+        .btn-cart { background: #1a7a5e; color: #fff; border-radius: 8px; padding: 8px 24px; }
+        .btn-back { border: 1px solid #1a7a5e; color: #1a7a5e; border-radius: 8px; padding: 8px 20px; }
+        .qty-input { width: 80px; text-align: center; }
+        .desc-block { border-left: 4px solid #1a7a5e; background: #f0f9f5; padding: 14px 18px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar bg-white shadow-sm px-4">
+    <a class="navbar-brand fw-bold" style="color:#1a7a5e;" href="/">★ MedStore</a>
+    <div class="d-flex gap-3">
+        <a class="nav-link" href="/medicines">Medicines</a>
+        <a class="nav-link" href="/orders">Orders</a>
+        <a class="nav-link" href="/reviews">Reviews</a>
+        <a class="nav-link" href="/admin">Admin</a>
+        <a class="nav-link" href="/cart">Cart</a>
+        <a class="btn btn-sm text-white" style="background:#1a7a5e; border-radius:20px;" href="/login">Login</a>
+    </div>
+</nav>
+
+<div class="container mt-4 mb-5">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/" style="color:#1a7a5e;">Home</a></li>
+            <li class="breadcrumb-item"><a href="/medicines" style="color:#1a7a5e;">Medicines</a></li>
+            <li class="breadcrumb-item active" th:text="${med.name}"></li>
+        </ol>
+    </nav>
+
+    <div class="detail-card bg-white shadow-sm">
+
+        <!-- Header -->
+        <div class="detail-header">
+            <h3 th:text="${med.name}"></h3>
+            <div class="d-flex gap-2 mt-2 flex-wrap">
+                <span class="badge bg-light text-dark" th:text="${med.medId}"></span>
+                <span class="badge bg-light text-dark" th:text="${med.category}"></span>
+                <span class="badge bg-light text-dark" th:text="${med.displayInfo}"></span>
+            </div>
+        </div>
+
+        <div class="p-4 d-flex flex-column gap-3">
+
+            <!-- Price + Stock -->
+            <div class="d-flex gap-3">
+                <div class="p-3 bg-light rounded text-center flex-fill">
+                    <small class="text-muted d-block">Price</small>
+                    <strong th:text="'Rs. ' + ${med.price}"></strong>
+                </div>
+                <div class="p-3 bg-light rounded text-center flex-fill">
+                    <small class="text-muted d-block">Stock</small>
+                    <strong th:text="${med.stock} + ' units'"></strong>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="desc-block rounded">
+                <small class="fw-bold d-block mb-1" style="color:#1a7a5e;">About this medicine</small>
+                <p class="mb-0 text-muted" th:text="${med.description}"></p>
+            </div>
+
+            <!-- Add to Cart -->
+            <form th:action="@{/cart/add}" method="post"
+                  class="d-flex align-items-center gap-3" th:if="${med.stock > 0}">
+                <input type="hidden" name="medId"     th:value="${med.medId}">
+                <input type="hidden" name="medName"   th:value="${med.name}">
+                <input type="hidden" name="unitPrice" th:value="${med.price}">
+                <input type="hidden" name="userId"    value="USR001">
+                <input type="hidden" name="redirect"  value="medicine-detail">
+                <div class="d-flex align-items-center gap-2">
+                    <small>Qty:</small>
+                    <input type="number" name="quantity" value="1" min="1"
+                           th:max="${med.stock}" class="form-control qty-input">
+                </div>
+                <button type="submit" class="btn btn-cart">Add to Cart</button>
+                <a href="/medicines" class="btn btn-back">← Back</a>
+            </form>
+
+            <div th:if="${med.stock == 0}" class="d-flex gap-3 align-items-center">
+                <span class="badge bg-danger p-2">Out of Stock</span>
+                <a href="/medicines" class="btn btn-back">← Back to Medicines</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
