@@ -35,7 +35,9 @@ public class ReviewService {
     public void addReview(String userName,String userEmails, String medId, int rating, String comment) {
         new File("data").mkdirs();
         String id = "REV" + System.currentTimeMillis();
-        VerifiedReview r = new VerifiedReview(id, userName, userEmails, medId, rating, comment);
+        //add date
+        String date = java.time.LocalDate.now().toString();
+        VerifiedReview r = new VerifiedReview(id, userName, userEmails, medId, rating, comment,date);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE, true))) {
             bw.write(r.toFileString()); bw.newLine();
         } catch (IOException e) { e.printStackTrace(); }
