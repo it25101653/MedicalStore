@@ -25,6 +25,7 @@ public class OrderService {
 
     public void placeOrder(String userId, String medId,
                            String medName, int qty, double unitPrice) {
+        // Generate unique order ID
         String id = "ORD" + System.currentTimeMillis();
         OnlineOrder temp = new OnlineOrder(id, userId, medId, medName, qty, 0, "PENDING");
         double total = temp.calculateTotal(unitPrice, qty);
