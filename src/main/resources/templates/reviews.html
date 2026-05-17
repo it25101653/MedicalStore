@@ -59,43 +59,18 @@
         </div>
     </div>
 
-    <!-- Filter by Rating -->
-    <div style="display:flex;gap:10px;margin-bottom:1.5rem;align-items:center;flex-wrap:wrap;">
-        <a th:href="@{/reviews}"
-           class="ms-btn ms-btn-sm"
-           th:classappend="${rating == null} ? ' ms-btn-primary' : ' ms-btn-ghost'">
-            All
-        </a>
-        <a th:href="@{/reviews(rating=5)}"
-           class="ms-btn ms-btn-sm"
-           style="color:#f0a500;"
-           th:classappend="${rating == 5} ? ' ms-btn-primary' : ' ms-btn-ghost'">
-            ★★★★★
-        </a>
-        <a th:href="@{/reviews(rating=4)}"
-           class="ms-btn ms-btn-sm"
-           style="color:#f0a500;"
-           th:classappend="${rating == 4} ? ' ms-btn-primary' : ' ms-btn-ghost'">
-            ★★★★☆
-        </a>
-        <a th:href="@{/reviews(rating=3)}"
-           class="ms-btn ms-btn-sm"
-           style="color:#f0a500;"
-           th:classappend="${rating == 3} ? ' ms-btn-primary' : ' ms-btn-ghost'">
-            ★★★☆☆
-        </a>
-        <a th:href="@{/reviews(rating=2)}"
-           class="ms-btn ms-btn-sm"
-           style="color:#f0a500;"
-           th:classappend="${rating == 2} ? ' ms-btn-primary' : ' ms-btn-ghost'">
-            ★★☆☆☆
-        </a>
-        <a th:href="@{/reviews(rating=1)}"
-           class="ms-btn ms-btn-sm"
-           style="color:#f0a500;"
-           th:classappend="${rating == 1} ? ' ms-btn-primary' : ' ms-btn-ghost'">
-            ★☆☆☆☆
-        </a>
+
+    <div style="margin-bottom:1.5rem;display:flex;align-items:center;gap:12px;">
+        <label class="ms-label">Filter by Rating:</label>
+        <select class="ms-select" style="width:180px;"
+                onchange="window.location.href='/reviews?rating=' + (this.value || '')">
+            <option value="" th:selected="${rating == null}">All Ratings</option>
+            <option value="5" th:selected="${rating == 5}">★★★★★ 5 Stars</option>
+            <option value="4" th:selected="${rating == 4}">★★★★☆ 4 Stars</option>
+            <option value="3" th:selected="${rating == 3}">★★★☆☆ 3 Stars</option>
+            <option value="2" th:selected="${rating == 2}">★★☆☆☆ 2 Stars</option>
+            <option value="1" th:selected="${rating == 1}">★☆☆☆☆ 1 Star</option>
+        </select>
     </div>
 
     <!-- Submit Review -->
