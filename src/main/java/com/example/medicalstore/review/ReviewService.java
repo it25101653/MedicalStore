@@ -56,4 +56,11 @@ public class ReviewService {
             for (Review r : list) { bw.write(r.toFileString()); bw.newLine(); }
         } catch (IOException e) { e.printStackTrace(); }
     }
+
+    //filter reviews
+    public List<Review> getReviewsByRating(int rating){
+        return getAllReviews() .stream()
+                .filter(r -> r.getRating() == rating )
+                .collect(Collectors.toList());
+    }
 }
