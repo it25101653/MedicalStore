@@ -10,15 +10,17 @@ public abstract class Review {
     private final String medId;
     private final int rating;
     private final String comment;
+    private final String date;
 
     //paramerized constructor
-    public Review(String reviewId, String userName,String userEmails, String medId, int rating, String comment) {
+    public Review(String reviewId, String userName,String userEmails, String medId, int rating, String comment, String date) {
         this.reviewId = reviewId;
         this.userName   = userName;
         this.userEmails = userEmails;
         this.medId    = medId;
         this.rating   = rating;
         this.comment  = comment;
+        this.date = date;
     }
 
     //getters
@@ -40,16 +42,17 @@ public abstract class Review {
     public String getComment() {
         return comment;
     }
+    public String getDate() {return date; }
 
 
     public abstract String getDisplayLabel();
 
     public String toFileString() {
-        return reviewId+","+userName+","+userEmails+","+medId+","+rating+","+comment+","+getDisplayLabel();
+        return reviewId+","+userName+","+userEmails+","+medId+","+rating+","+comment+"," +date+"," +getDisplayLabel();
     }
 
     public static Review fromFileString(String line) {
-        String[] p = line.split(",", 7);
-        return new VerifiedReview(p[0], p[1], p[2], p[3], Integer.parseInt(p[4]), p[5]);
+        String[] p = line.split(",", 8);
+        return new VerifiedReview(p[0], p[1], p[2], p[3], Integer.parseInt(p[4]), p[5], p[6]);
     }
 }
