@@ -12,7 +12,7 @@ public class CartItem {
         this.userId    = userId;
         this.medId     = medId;
         this.medName   = medName;
-        this.quantity  = quantity;
+        this.quantity = Math.max(quantity, 1);
         this.unitPrice = unitPrice;
     }
 
@@ -33,11 +33,11 @@ public class CartItem {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        this.quantity = Math.max(quantity, 1);
     }
 
     public double getItemTotal() {
-        return unitPrice * quantity;
+        return Math.max(unitPrice * quantity, 0);
     }
 
     public String toFileString() {
