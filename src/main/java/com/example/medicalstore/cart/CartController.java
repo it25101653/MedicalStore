@@ -18,13 +18,28 @@ public class CartController {
         return "cart";
     }
 
+    /**
+     * Add item to cart.
+     * If a 'redirect' param is provided (e.g. "medicines" or "medicine-detail"),
+     * the user is sent back there so they can continue shopping.
+     * Default is to show the cart.
+     */
     @PostMapping("/cart/add")
     public String addItem(@RequestParam String userId,
                           @RequestParam String medId,
                           @RequestParam String medName,
                           @RequestParam int quantity,
-                          @RequestParam double unitPrice) {
+                          @RequestParam double unitPrice,
+                          @RequestParam(defaultValue = "cart") String redirect) {
+
         cartService.addItem(new CartItem(userId, medId, medName, quantity, unitPrice));
+
+        if ("medicines".equals(redirect)) {
+            return "redirect:/medicines";
+        }
+        if (redirect.startsWith("medicine-detail")) {
+            return "redirect:/medicines/view?id=" + medId;
+        }
         return "redirect:/cart?userId=" + userId;
     }
 
