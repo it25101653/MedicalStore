@@ -16,11 +16,19 @@ public class ReviewController {
     //method for show reviews
     @GetMapping("/reviews")
     public String showReviews(@RequestParam(required = false) String medId,
+                              @RequestParam(required = false) Integer rating,
                               Model model) {
-        List<Review> reviews = (medId != null && !medId.isEmpty())
-                ? reviewService.getReviewsForMedicine(medId)
-                : reviewService.getAllReviews();
+        List<Review> reviews;
+        if (rating != null) {
+            reviews = reviewService.getReviewsByRating(rating);
+        } else if (medId != null && !medId.isEmpty()) {
+            reviews = reviewService.getReviewsForMedicine(medId);
+        } else {
+            reviews = reviewService.getAllReviews();
+        }
         model.addAttribute("reviews", reviews);
+        model.addAttribute("medId", medId);
+        model.addAttribute("rating", rating);
         return "reviews";
     }
     //add review method
