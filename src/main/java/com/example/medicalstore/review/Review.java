@@ -11,9 +11,11 @@ public abstract class Review {
     private final int rating;
     private final String comment;
     private final String date;
+    private int likes;
+    private int dislikes;
 
     //paramerized constructor
-    public Review(String reviewId, String userName,String userEmails, String medId, int rating, String comment, String date) {
+    public Review(String reviewId, String userName,String userEmails, String medId, int rating, String comment, String date, int likes, int dislikes) {
         this.reviewId = reviewId;
         this.userName   = userName;
         this.userEmails = userEmails;
@@ -21,6 +23,8 @@ public abstract class Review {
         this.rating   = rating;
         this.comment  = comment;
         this.date = date;
+        this.likes = likes;
+        this.dislikes = dislikes;
     }
 
     //getters
@@ -43,16 +47,28 @@ public abstract class Review {
         return comment;
     }
     public String getDate() {return date; }
+    public int getLikes(){return likes; }
+    public int getDislikes() {return dislikes;}
 
+    //setters
+
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
+    }
 
     public abstract String getDisplayLabel();
 
     public String toFileString() {
-        return reviewId+","+userName+","+userEmails+","+medId+","+rating+","+comment+"," +date+"," +getDisplayLabel();
+        return reviewId+","+userName+","+userEmails+","+medId+","+rating+","+comment+"," +date+","+likes+","+dislikes+"," +getDisplayLabel();
     }
 
     public static Review fromFileString(String line) {
-        String[] p = line.split(",", 8);
-        return new VerifiedReview(p[0], p[1], p[2], p[3], Integer.parseInt(p[4]), p[5], p[6]);
+        String[] p = line.split(",", 10);
+        return new VerifiedReview(p[0], p[1], p[2], p[3], Integer.parseInt(p[4]), p[5], p[6], Integer.parseInt(p[7]),Integer.parseInt(p[8]));
     }
 }
