@@ -49,4 +49,18 @@ public class ReviewController {
         reviewService.delete(id);
         return "redirect:/reviews";
     }
+
+    //like a review
+    @GetMapping("/reviews/like")
+    public String likeReview(@RequestParam String id) {
+        reviewService.likeReview(id);
+        return "redirect:/reviews";
+    }
+
+    //dislike a review
+    @GetMapping("/reviews/dislike")
+    public String dislikeReview(@RequestParam String id) {
+        reviewService.dislikeReview(id);
+        return "redirect:/reviews";
+    }
 }
