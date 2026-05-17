@@ -25,7 +25,7 @@ public class CartController {
                           @RequestParam String medId,
                           @RequestParam String medName,
                           @RequestParam int quantity,
-                          @RequestParam double unitPrice) 
+                          @RequestParam double unitPrice,
                           @RequestParam(defaultValue = "cart") String redirect)    {
         cartService.addItem(new CartItem(userId, medId, medName, quantity, unitPrice));
            if ("medicines".equals(redirect)) {
