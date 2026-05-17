@@ -37,7 +37,7 @@ public class ReviewService {
         String id = "REV" + System.currentTimeMillis();
         //add date
         String date = java.time.LocalDate.now().toString();
-        VerifiedReview r = new VerifiedReview(id, userName, userEmails, medId, rating, comment,date);
+        VerifiedReview r = new VerifiedReview(id, userName, userEmails, medId, rating, comment,date, 0, 0);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE, true))) {
             bw.write(r.toFileString()); bw.newLine();
         } catch (IOException e) { e.printStackTrace(); }
@@ -62,5 +62,26 @@ public class ReviewService {
         return getAllReviews() .stream()
                 .filter(r -> r.getRating() == rating )
                 .collect(Collectors.toList());
+    }
+
+    //likes
+    public void likeReview(String reviewId) {
+        List <Review> list = getAllReviews();
+        for (Review r : list){
+            if (r.getReviewId().equals(reviewId)){
+                r.setLikes(r.getLikes() + 1);
+            }
+        }
+        saveAll(list);
+    }
+    //dislikes
+    public void dislikeReview(String reviewId){
+        List  <Review> list = getAllReviews();
+        for (Review r : list){
+            if (r.getReviewId().equals(reviewId)){
+                r.setDislikes(r.getDislikes() + 1);
+            }
+        }
+        saveAll(list);
     }
 }
