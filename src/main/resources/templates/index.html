@@ -19,9 +19,8 @@
         </a>
         <div class="ms-nav-links">
             <a href="/medicines" class="ms-nav-link">Medicines</a>
-            <a href="/orders"    class="ms-nav-link">Orders</a>
             <a href="/reviews"   class="ms-nav-link">Reviews</a>
-            <a href="/admin"     class="ms-nav-link">Admin</a>
+            <a href="/cart?userId=USR001" class="ms-nav-link">Cart</a>
         </div>
         <div class="ms-nav-right">
             <a href="/login"    class="ms-btn ms-btn-outline ms-btn-sm">Login</a>
@@ -73,13 +72,6 @@
             <div class="ms-admin-tile-label">Medicines</div>
             <div class="ms-admin-tile-sub">Browse our full catalogue</div>
         </a>
-        <a href="/orders" class="ms-admin-tile tile-amber">
-            <div class="ms-admin-tile-icon">
-                <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-            </div>
-            <div class="ms-admin-tile-label">Orders</div>
-            <div class="ms-admin-tile-sub">Track your purchases</div>
-        </a>
         <a href="/reviews" class="ms-admin-tile tile-blue">
             <div class="ms-admin-tile-icon">
                 <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -87,18 +79,29 @@
             <div class="ms-admin-tile-label">Reviews</div>
             <div class="ms-admin-tile-sub">Share your experience</div>
         </a>
-        <a href="/cart" class="ms-admin-tile tile-teal">
+        <a href="/cart?userId=USR001" class="ms-admin-tile tile-teal">
             <div class="ms-admin-tile-icon">
                 <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
             </div>
             <div class="ms-admin-tile-label">My Cart</div>
             <div class="ms-admin-tile-sub">View items &amp; checkout</div>
         </a>
+        <a href="/login" class="ms-admin-tile tile-amber">
+            <div class="ms-admin-tile-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="ms-admin-tile-label">My Account</div>
+            <div class="ms-admin-tile-sub">Login or register</div>
+        </a>
     </div>
 </div>
 
 <footer class="ms-footer">
-    © 2025 <span>MedStore</span> — Licensed Online Pharmacy. All rights reserved.
+    © 2026 <span>MedStore</span> — Licensed Online Pharmacy.
+    <a href="/admin/login"
+       style="color:var(--slate-light);margin-left:16px;font-size:12px;">
+        Admin Access
+    </a>
 </footer>
 </body>
 </html>

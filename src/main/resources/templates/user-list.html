@@ -13,17 +13,17 @@
     <div class="ms-nav-inner">
         <a class="ms-logo" href="/">
             <div class="ms-logo-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2l2 7h7l-5.6 4.1L17.4 20 12 15.9 6.6 20l2-6.9L3 9h7z"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                    <path d="M12 2l2 7h7l-5.6 4.1L17.4 20 12 15.9 6.6 20l2-6.9L3 9h7z"/>
+                </svg>
             </div>
             <span class="ms-logo-text">Med<span>Store</span></span>
         </a>
         <div class="ms-nav-links">
-            <a href="/medicines" class="ms-nav-link">Medicines</a>
-            <a href="/orders"    class="ms-nav-link">Orders</a>
-            <a href="/admin"     class="ms-nav-link">Admin</a>
+            <a href="/admin" class="ms-nav-link">Admin</a>
         </div>
         <div class="ms-nav-right">
-            <a href="/" class="ms-btn ms-btn-ghost ms-btn-sm">← Home</a>
+            <a href="/admin" class="ms-btn ms-btn-ghost ms-btn-sm">← Admin Panel</a>
         </div>
     </div>
 </nav>
@@ -32,7 +32,10 @@
     <div class="ms-page-header">
         <div>
             <div class="ms-page-title">All Users</div>
-            <div class="ms-page-subtitle">Manage registered customer accounts — <strong th:text="${userCount}"></strong> users registered</div>
+            <div class="ms-page-subtitle">
+                Manage registered customer accounts —
+                <strong th:text="${userCount}"></strong> users registered
+            </div>
         </div>
         <a href="/admin" class="ms-btn ms-btn-ghost ms-btn-sm">← Admin Panel</a>
     </div>
@@ -53,21 +56,29 @@
                 <td><span class="ms-badge badge-gray" th:text="${user.userId}"></span></td>
                 <td>
                     <div style="display:flex;align-items:center;gap:10px;">
-                        <div style="width:32px;height:32px;background:var(--teal-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--teal-dark);flex-shrink:0;"
+                        <div style="width:32px;height:32px;background:var(--teal-light);
+                                    border-radius:50%;display:flex;align-items:center;
+                                    justify-content:center;font-size:12px;font-weight:600;
+                                    color:var(--teal-dark);flex-shrink:0;"
                              th:text="${#strings.substring(user.name,0,1).toUpperCase()}">U</div>
                         <strong th:text="${user.name}"></strong>
                     </div>
                 </td>
                 <td style="color:var(--slate-mid);" th:text="${user.email}"></td>
                 <td>
-                    <span th:if="${user.role == 'ADMIN'}" class="ms-badge badge-teal">Admin</span>
-                    <span th:if="${user.role == 'USER'}"  class="ms-badge badge-blue">User</span>
-                    <span th:if="${user.role != 'ADMIN' and user.role != 'USER'}"
+                    <span th:if="${user.role == 'ADMIN'}"
+                          class="ms-badge badge-teal">Admin</span>
+                    <span th:if="${user.role == 'CUSTOMER'}"
+                          class="ms-badge badge-blue">Customer</span>
+                    <span th:if="${user.role != 'ADMIN' and user.role != 'CUSTOMER'}"
                           class="ms-badge badge-gray" th:text="${user.role}"></span>
                 </td>
                 <td>
                     <div class="ms-actions">
-                        <a th:href="@{/users/edit(id=${user.userId})}" class="ms-btn ms-btn-warning ms-btn-sm">Edit</a>
+                        <a th:href="@{/users/profile(id=${user.userId})}"
+                           class="ms-btn ms-btn-primary ms-btn-sm">View</a>
+                        <a th:href="@{/users/edit(id=${user.userId})}"
+                           class="ms-btn ms-btn-warning ms-btn-sm">Edit</a>
                         <a th:href="@{/users/delete(id=${user.userId})}"
                            class="ms-btn ms-btn-danger ms-btn-sm"
                            onclick="return confirm('Delete this user?')">Delete</a>
@@ -80,7 +91,7 @@
 </div>
 
 <footer class="ms-footer">
-    © 2025 <span>MedStore</span> — Licensed Online Pharmacy
+    © 2026 <span>MedStore</span> — Licensed Online Pharmacy
 </footer>
 </body>
 </html>
