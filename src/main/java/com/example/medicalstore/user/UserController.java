@@ -21,7 +21,12 @@ public class UserController {
                           @RequestParam String password,
                           Model model) {
         User user = userService.login(email, password);
-        if (user != null) return "redirect:/medicines";
+        if (user != null) {
+            if (user.getRole().equals("ADMIN")) {
+                return "redirect:/admin";
+            }
+            return "redirect:/medicines";
+        }
         model.addAttribute("error", "Invalid email or password");
         return "login";
     }
@@ -33,8 +38,7 @@ public class UserController {
     public String doRegister(@RequestParam String name,
                              @RequestParam String email,
                              @RequestParam String password,
-                             Model model
-    ) {
+                             Model model) {
         try {
             Customer c = new Customer(userService.generateId(), name, email, password);
             userService.register(c);
