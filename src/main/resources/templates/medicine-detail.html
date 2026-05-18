@@ -1,101 +1,185 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${med.name} + ' – MedStore'">Medicine Detail</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title th:text="${med.name} + ' — MedStore'">Medicine Detail</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/medstore.css}" href="medstore.css">
     <style>
-        body { background: #f5f7f2; }
-        .detail-card { border-radius: 16px; overflow: hidden; border: 1px solid #c7ddd6; }
-        .detail-header { background: #1a7a5e; color: #fff; padding: 28px; }
-        .btn-cart { background: #1a7a5e; color: #fff; border-radius: 8px; padding: 8px 24px; }
-        .btn-back { border: 1px solid #1a7a5e; color: #1a7a5e; border-radius: 8px; padding: 8px 20px; }
-        .qty-input { width: 80px; text-align: center; }
-        .desc-block { border-left: 4px solid #1a7a5e; background: #f0f9f5; padding: 14px 18px; }
+        .detail-hero {
+            background: linear-gradient(135deg, var(--teal-xdark), var(--teal));
+            padding: 28px 32px;
+            border-radius: var(--r-lg) var(--r-lg) 0 0;
+        }
+        .detail-hero h2 {
+            font-family: 'DM Serif Display', serif;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .detail-body { padding: 2rem; }
+        .detail-stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 1.5rem;
+        }
+        .detail-stat {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            padding: 1rem 1.25rem;
+            text-align: center;
+        }
+        .detail-stat-label { font-size: 12px; color: var(--slate-light); margin-bottom: 4px; }
+        .detail-stat-value {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            color: var(--teal-dark);
+        }
+        .desc-block {
+            border-left: 4px solid var(--teal);
+            background: var(--teal-light);
+            padding: 14px 18px;
+            border-radius: 0 var(--r-sm) var(--r-sm) 0;
+            margin-bottom: 1.5rem;
+        }
+        .desc-block-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--teal-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+        .desc-block p { font-size: 14px; color: var(--slate-mid); margin: 0; }
+        .qty-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .qty-input {
+            width: 80px;
+            padding: 9px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-sm);
+            font-size: 14px;
+            text-align: center;
+            outline: none;
+        }
+        .qty-input:focus { border-color: var(--teal); }
+        .breadcrumb {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 13px;
+            color: var(--slate-light);
+            margin-bottom: 1.5rem;
+        }
+        .breadcrumb a { color: var(--teal); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb-sep { color: var(--border); }
     </style>
 </head>
 <body>
 
-<nav class="navbar bg-white shadow-sm px-4">
-    <a class="navbar-brand fw-bold" style="color:#1a7a5e;" href="/">★ MedStore</a>
-    <div class="d-flex gap-3">
-        <a class="nav-link" href="/medicines">Medicines</a>
-        <a class="nav-link" href="/orders">Orders</a>
-        <a class="nav-link" href="/reviews">Reviews</a>
-        <a class="nav-link" href="/admin">Admin</a>
-        <a class="nav-link" href="/cart">Cart</a>
-        <a class="btn btn-sm text-white" style="background:#1a7a5e; border-radius:20px;" href="/login">Login</a>
+<nav class="ms-nav">
+    <div class="ms-nav-inner">
+        <a class="ms-logo" href="/">
+            <div class="ms-logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                    <path d="M12 2l2 7h7l-5.6 4.1L17.4 20 12 15.9 6.6 20l2-6.9L3 9h7z"/>
+                </svg>
+            </div>
+            <span class="ms-logo-text">Med<span>Store</span></span>
+        </a>
+        <div class="ms-nav-links">
+            <a href="/medicines" class="ms-nav-link active">Medicines</a>
+            <a href="/orders"    class="ms-nav-link">Orders</a>
+            <a href="/reviews"   class="ms-nav-link">Reviews</a>
+            <a href="/admin"     class="ms-nav-link">Admin</a>
+            <a href="/cart"      class="ms-nav-link">Cart</a>
+        </div>
+        <div class="ms-nav-right">
+            <a href="/login"    class="ms-btn ms-btn-outline ms-btn-sm">Login</a>
+            <a href="/register" class="ms-btn ms-btn-primary ms-btn-sm">Register</a>
+        </div>
     </div>
 </nav>
 
-<div class="container mt-4 mb-5">
+<div class="ms-page-md">
 
     <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/" style="color:#1a7a5e;">Home</a></li>
-            <li class="breadcrumb-item"><a href="/medicines" style="color:#1a7a5e;">Medicines</a></li>
-            <li class="breadcrumb-item active" th:text="${med.name}"></li>
-        </ol>
-    </nav>
+    <div class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="/medicines">Medicines</a>
+        <span class="breadcrumb-sep">›</span>
+        <span th:text="${med.name}"></span>
+    </div>
 
-    <div class="detail-card bg-white shadow-sm">
+    <div class="ms-card" style="padding:0; overflow:hidden;">
 
         <!-- Header -->
-        <div class="detail-header">
-            <h3 th:text="${med.name}"></h3>
-            <div class="d-flex gap-2 mt-2 flex-wrap">
-                <span class="badge bg-light text-dark" th:text="${med.medId}"></span>
-                <span class="badge bg-light text-dark" th:text="${med.category}"></span>
-                <span class="badge bg-light text-dark" th:text="${med.displayInfo}"></span>
+        <div class="detail-hero">
+            <h2 th:text="${med.name}"></h2>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <span class="ms-badge badge-teal" th:text="${med.medId}"></span>
+                <span class="ms-badge badge-teal" th:text="${med.category}"></span>
+                <span class="ms-badge badge-teal" th:text="${med.displayInfo}"></span>
             </div>
         </div>
 
-        <div class="p-4 d-flex flex-column gap-3">
+        <div class="detail-body">
 
             <!-- Price + Stock -->
-            <div class="d-flex gap-3">
-                <div class="p-3 bg-light rounded text-center flex-fill">
-                    <small class="text-muted d-block">Price</small>
-                    <strong th:text="'Rs. ' + ${med.price}"></strong>
+            <div class="detail-stat-row">
+                <div class="detail-stat">
+                    <div class="detail-stat-label">Price</div>
+                    <div class="detail-stat-value" th:text="'Rs. ' + ${med.price}"></div>
                 </div>
-                <div class="p-3 bg-light rounded text-center flex-fill">
-                    <small class="text-muted d-block">Stock</small>
-                    <strong th:text="${med.stock} + ' units'"></strong>
+                <div class="detail-stat">
+                    <div class="detail-stat-label">Stock</div>
+                    <div class="detail-stat-value" th:text="${med.stock} + ' units'"></div>
                 </div>
             </div>
 
             <!-- Description -->
-            <div class="desc-block rounded">
-                <small class="fw-bold d-block mb-1" style="color:#1a7a5e;">About this medicine</small>
-                <p class="mb-0 text-muted" th:text="${med.description}"></p>
+            <div class="desc-block">
+                <div class="desc-block-label">About this medicine</div>
+                <p th:text="${med.description}"></p>
             </div>
 
             <!-- Add to Cart -->
             <form th:action="@{/cart/add}" method="post"
-                  class="d-flex align-items-center gap-3" th:if="${med.stock > 0}">
+                  style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"
+                  th:if="${med.stock > 0}">
                 <input type="hidden" name="medId"     th:value="${med.medId}">
                 <input type="hidden" name="medName"   th:value="${med.name}">
                 <input type="hidden" name="unitPrice" th:value="${med.price}">
                 <input type="hidden" name="userId"    value="USR001">
                 <input type="hidden" name="redirect"  value="medicine-detail">
-                <div class="d-flex align-items-center gap-2">
-                    <small>Qty:</small>
+                <div class="qty-row">
+                    <label style="font-size:13px;color:var(--slate-mid);">Qty:</label>
                     <input type="number" name="quantity" value="1" min="1"
-                           th:max="${med.stock}" class="form-control qty-input">
+                           th:max="${med.stock}" class="qty-input">
                 </div>
-                <button type="submit" class="btn btn-cart">Add to Cart</button>
-                <a href="/medicines" class="btn btn-back">← Back</a>
+                <button type="submit" class="ms-btn ms-btn-primary">Add to Cart</button>
+                <a href="/medicines" class="ms-btn ms-btn-ghost">← Back</a>
             </form>
 
-            <div th:if="${med.stock == 0}" class="d-flex gap-3 align-items-center">
-                <span class="badge bg-danger p-2">Out of Stock</span>
-                <a href="/medicines" class="btn btn-back">← Back to Medicines</a>
+            <div th:if="${med.stock == 0}" style="display:flex; gap:12px; align-items:center;">
+                <span class="ms-badge badge-red" style="padding:8px 14px;">Out of Stock</span>
+                <a href="/medicines" class="ms-btn ms-btn-ghost">← Back to Medicines</a>
             </div>
 
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<footer class="ms-footer">
+    © 2026 <span>MedStore</span> — Licensed Online Pharmacy
+</footer>
 </body>
 </html>
